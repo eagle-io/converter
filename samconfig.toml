@@ -1,0 +1,10 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "converter"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-zp32xcwo3asx"
+s3_prefix = "converter"
+region = "ap-southeast-2"
+capabilities = "CAPABILITY_IAM"
+image_repositories = []

@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Library of functions to convert binary timeseries data to JTS
+
+Globals:
+  Function:
+    Timeout: 3
+    Runtime: nodejs16.x
+    Architectures:
+      - x86_64
+    MemorySize: 128
+
+Resources:
+  Sample:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.sampleConverter
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Tags:
+        Name: Sample CSV
+        Scope: private
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: "es2020"
+        Sourcemap: true
+        EntryPoints:
+        - converter.ts
