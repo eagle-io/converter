@@ -1,3 +1,4 @@
+
 version: v1.0
 name: Converter
 agent:
@@ -7,8 +8,6 @@ agent:
   containers:
     - name: main
       image: 'public.ecr.aws/sam/build-nodejs16.x:latest'
-  image_pull_secrets:
-    - name: aws-public-ecr-secrets
 blocks:
   - name: Deploy to Lambda
     task:
