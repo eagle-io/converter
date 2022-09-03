@@ -5,9 +5,9 @@ import { parse } from 'csv-parse/sync'
 export class SampleConverter extends Converter {
   convert (input: Buffer): JtsDocument {
     const csv = input.toString('utf-8')
-    const series1 = new TimeSeries({ type: 'NUMBER' })
-    const series2 = new TimeSeries({ type: 'TEXT' })
-    const series3 = new TimeSeries({ type: 'TEXT' })
+    const series1 = new TimeSeries({ name: 'first', type: 'NUMBER' })
+    const series2 = new TimeSeries({ name: 'second', type: 'TEXT' })
+    const series3 = new TimeSeries({ name: 'third', type: 'TEXT' })
 
     parse(csv, { columns: true }).forEach((row: {timestamp: string, first: string, second: string, third: string}) => {
       const ts = new Date(row.timestamp)
