@@ -1,11 +1,17 @@
 import { JtsDocument } from '@eagle-io/timeseries'
-import { SampleConverter } from './lib/sample'
 import { Converter } from './converter'
+import { SampleConverter } from './lib/sample'
 
-function convert (converter: Converter, input: string): JtsDocument {
-  return converter.convert(Buffer.from(input))
+interface ConverterInput {
+  payload: string
 }
 
-export const sampleConverter = (input: string): JtsDocument => {
+function convert (converter: Converter, input: ConverterInput): JtsDocument {
+  const payload = Buffer.from(input.payload, 'base64')
+  return converter.convert(payload)
+}
+
+// https://docs.aws.amazon.com/lambda/latest/dg/typescript-handler.html
+export const sampleConverter = async (input: ConverterInput): Promise<JtsDocument> => {
   return convert(new SampleConverter(), input)
 }
