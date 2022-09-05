@@ -1,6 +1,5 @@
-
 version: v1.0
-name: Converter
+name: Deploy Converters
 agent:
   machine:
     type: e1-standard-2
@@ -9,14 +8,14 @@ agent:
     - name: main
       image: 'public.ecr.aws/sam/build-nodejs16.x:latest'
 blocks:
-  - name: Commit
+  - name: Deploy to Lambda
     task:
       jobs:
-        - name: Test
+        - name: Deploying
           commands:
+            - npm install --global esbuild
             - checkout
-            - npm install
-            - npm run test
-promotions:
-  - name: Deploy converters
-    pipeline_file: deploy-converters.yml
+            - sam build
+            - sam deploy
+      secrets:
+        - name: aws-cli-prod-creds
