@@ -14,11 +14,11 @@ Resources:
   Sample:
     Type: AWS::Serverless::Function
     Properties:
+      Description: Sample CSV
       Handler: index.sampleConverter
       Policies:
         - AWSLambdaBasicExecutionRole
       Tags:
-        Name: Sample CSV
         Scope: private
     Metadata:
       BuildMethod: esbuild
