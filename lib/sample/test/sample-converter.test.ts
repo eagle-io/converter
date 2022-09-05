@@ -1,10 +1,10 @@
 import * as fs from 'fs'
-import { SampleConverter } from './sample'
+import { SampleConverter } from '../sample-converter'
 
 describe('Unit test for sample converter', function () {
   it('converts sample file', async () => {
     const converter = new SampleConverter()
-    const buff = fs.readFileSync('lib/sample.dat')
+    const buff = fs.readFileSync('lib/sample/test/input.dat')
     const result = converter.convert(buff)
 
     expect(result.series[0].values).toEqual([3.5, 5.7, 7.8])

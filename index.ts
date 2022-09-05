@@ -1,6 +1,6 @@
 import { JtsDocument } from '@eagle-io/timeseries'
 import { Converter } from './converter'
-import { SampleConverter } from './lib/sample'
+import { SampleConverter } from './lib/sample/sample-converter'
 
 interface ConverterInput {
   payload: string

@@ -1,7 +1,10 @@
 import { JtsDocument, TimeSeries } from '@eagle-io/timeseries'
-import { Converter } from '../converter'
+import { Converter } from '../../converter'
 import { parse } from 'csv-parse/sync'
 
+/**
+ * Converts sample timeseries CSV -> JTS.
+ */
 export class SampleConverter extends Converter {
   convert (input: Buffer): JtsDocument {
     const series1 = new TimeSeries({ name: 'first', type: 'NUMBER' })
