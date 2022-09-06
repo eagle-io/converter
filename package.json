@@ -1,7 +1,7 @@
 {
   "name": "converter",
   "version": "1.0.0",
-  "description": "Library of functions to convert binary timeseries data to JTS",
+  "description": "Library of functions to convert timeseries data to JTS",
   "main": "index.ts",
   "repository": "https://github.com/eagle-io/converter",
   "author": "jarrah@eagle.io",
