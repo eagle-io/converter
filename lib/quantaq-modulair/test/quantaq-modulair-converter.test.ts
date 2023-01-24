@@ -28,6 +28,12 @@ describe('Unit test for QuantAQ MODULAIR Sensors', function () {
 
         // Check the Temp data
         expect(result.series[6].values).toEqual([21.8, 21.8, 21.8])
+
+        // Check the WS data
+        expect(result.series[7].values).toEqual([0, 0, 0])
+
+        // Check the WD data
+        expect(result.series[8].values).toEqual([0, 0, 0])
     })
 })
 
@@ -59,5 +65,11 @@ describe('Unit test for QuantAQ MODULAIR Sensor without TSP enabled', function (
 
         // Check the Temp data
         expect(result.series[6].values).toEqual([21.8, 21.8, 21.8])
+
+        // Check the WS data
+        expect(result.series[7].values).toEqual([NaN, NaN, NaN])
+
+        // Check the WD data
+        expect(result.series[8].values).toEqual([NaN, NaN, NaN])
     })
 })

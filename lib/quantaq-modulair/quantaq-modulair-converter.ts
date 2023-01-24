@@ -20,13 +20,16 @@ export class QuantAQModulairConverter extends Converter {
         const series5 = new TimeSeries({ name: 'tsp', type: 'NUMBER' })
         const series6 = new TimeSeries({ name: 'rh', type: 'NUMBER' })
         const series7 = new TimeSeries({ name: 'temp', type: 'NUMBER' })
+        const series8 = new TimeSeries({ name: 'ws', type: 'NUMBER' })
+        const series9 = new TimeSeries({ name: 'wd', type: 'NUMBER' })
 
         // Get the records
         const records = JSON.parse(input.toString())
 
         // Iterate over each record and convert to eagle-io's format
         records.data.forEach((row: {timestamp: string, sn: string, pm1: string, 
-                        pm25: string, pm10: string, tsp: string,  met: { rh: string, temp: string } }) => {
+                        pm25: string, pm10: string, tsp: string,  
+                        met: { rh: string, temp: string, ws: string, wd: string } }) => {
 
             const ts = new Date(row.timestamp)
 
@@ -37,8 +40,10 @@ export class QuantAQModulairConverter extends Converter {
             series5.insert({ timestamp: ts, value: Number(row.tsp) })
             series6.insert({ timestamp: ts, value: Number(row.met.rh) })
             series7.insert({ timestamp: ts, value: Number(row.met.temp) })
+            series8.insert({ timestamp: ts, value: Number(row.met.ws) })
+            series9.insert({ timestamp: ts, value: Number(row.met.wd) })
         })
 
-        return new JtsDocument({ series: [series1, series2, series3, series4, series5, series6, series7] })
+        return new JtsDocument({ series: [series1, series2, series3, series4, series5, series6, series7, series8, series9] })
     }
 }
