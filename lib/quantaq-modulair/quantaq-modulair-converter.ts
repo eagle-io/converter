@@ -1,8 +1,5 @@
 import { JtsDocument, TimeSeries } from '@eagle-io/timeseries'
 import { Converter } from '../../converter'
-import { parse } from 'csv-parse/sync'
-import { constants } from 'buffer';
-import { rawListeners } from 'process';
 
 /**
  * Convert the output from QuantAQ's RESTful API for the MODULAIR
