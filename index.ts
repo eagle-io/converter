@@ -1,6 +1,7 @@
 import { JtsDocument } from '@eagle-io/timeseries'
 import { Converter } from './converter'
 import { SampleConverter } from './lib/sample/sample-converter'
+import { QuantAQModulairConverter } from './lib/quantaq-modulair/quantaq-modulair-converter'
 
 interface ConverterInput {
   payload: string
@@ -20,4 +21,8 @@ function convert (converter: Converter, input: ConverterInput): JtsDocument {
 // https://docs.aws.amazon.com/lambda/latest/dg/typescript-handler.html
 export const sampleConverter = async (input: ConverterInput): Promise<JtsDocument> => {
   return convert(new SampleConverter(), input)
+}
+
+export const quantAqModulairConverter = async (input: ConverterInput): Promise<JtsDocument> => {
+  return convert(new QuantAQModulairConverter(), input)
 }
