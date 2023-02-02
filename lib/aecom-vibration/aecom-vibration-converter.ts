@@ -15,10 +15,10 @@ export class AecomVibrationConverter extends Converter {
     for (const row of records) {
       // Rows starting with # contain the base timestamp
       if (row[0] === '#') {
-        if (row.startsWith('# StartDate=')) {
+        if (!startDate && row.startsWith('# StartDate=')) {
           startDate = row.split('=').pop()
         }
-        if (row.startsWith('# StartTime=')) {
+        if (!startTime && row.startsWith('# StartTime=')) {
           startTime = row.split('=').pop()
         }
       } else if (row !== '') {
