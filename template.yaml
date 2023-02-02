@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: Library of functions to convert binary timeseries data to JTS
 
@@ -27,7 +27,7 @@ Resources:
         Target: "es2020"
         Sourcemap: true
         EntryPoints:
-        - index.ts
+          - index.ts
   QuantAqModulair:
     Type: AWS::Serverless::Function
     Properties:
@@ -37,6 +37,40 @@ Resources:
         - AWSLambdaBasicExecutionRole
       Tags:
         Scope: public
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: "es2020"
+        Sourcemap: true
+        EntryPoints:
+          - index.ts
+  AecomVibration:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: AECOM Vibration Sensor
+      Handler: index.aecomVibrationConverter
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Tags:
+        Scope: private
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: "es2020"
+        Sourcemap: true
+        EntryPoints:
+          - index.ts
+  AecomNoise:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: AECOM Noise Sensor
+      Handler: index.aecomNoiseConverter
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Tags:
+        Scope: private
     Metadata:
       BuildMethod: esbuild
       BuildProperties:

@@ -1,0 +1,71 @@
+# [ASCII]
+# Version=4
+# 
+# [Recorder]
+# Model=MR3000
+# Name=Court
+# Comment=site
+# UID=17170056
+# Firmware=2.2.8
+# 
+# [Sensor]
+# Name=MS2003BLA 250mm/s
+# Type=Velocity
+# Unit=mm/s
+# Range=527
+# Scale=263.5
+# NPhyChans=3
+# Chans=X,Y,Z
+# 
+# [StateOfHealth]
+# Voltage=12.5
+# 
+# [Time]
+# Mode=Local
+# Region=Australia
+# City=Darwin
+# UTCOffset=34200
+# 
+# [Acquisition]
+# Rate=1000
+# Filter=Flat
+# 
+# [Background]
+# Enabled=True
+# Mode=Peak + VSUM
+# Period=60
+# 
+# [Trigger]
+# Enabled=False
+# 
+# [Alarm1]
+# Enabled=True
+# Mode=VSUM
+# Threshold=20
+# 
+# [Alarm2]
+# Enabled=True
+# Mode=VSUM
+# Threshold=39
+# 
+# [File]
+# Type=Background
+# Signals=VM Peak + VM VSum
+# StartDate=2023-01-25
+# StartTime=10:03:46.625996
+# Length=00:01:00
+# Samples=1
+# Peak-X=0.0341325
+# Peak-Y=0.0211771
+# Peak-Z=0.029444
+# 
+# [Columns]
+# 1=Time
+# 2=VM Peak X
+# 3=VM Peak Y
+# 4=VM Peak Z
+# 5=VM VSum (X,Y,Z)
+# 
+0 0.0341325 0.0211771 0.029444 0.0370401
+60 0.0341325 0.0211771 0.029444 0.0370407
+180 0.0341325 0.0211771 0.029444 0.0370406
