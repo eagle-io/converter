@@ -45,11 +45,11 @@ Resources:
         Sourcemap: true
         EntryPoints:
           - index.ts
-  AecomVibration:
+  SyscomVibration:
     Type: AWS::Serverless::Function
     Properties:
-      Description: AECOM Vibration Sensor
-      Handler: index.aecomVibrationConverter
+      Description: Syscom MR3000BLA
+      Handler: index.syscomVibrationConverter
       Policies:
         - AWSLambdaBasicExecutionRole
       Tags:
@@ -62,7 +62,7 @@ Resources:
         Sourcemap: true
         EntryPoints:
           - index.ts
-  AecomNoise:
+  CubeNoise:
     Type: AWS::Serverless::Function
     Properties:
       Description: 01dB CUBE

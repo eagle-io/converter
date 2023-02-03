@@ -3,7 +3,7 @@ import { Converter } from '../../converter'
 import { parse } from 'csv-parse/sync'
 
 /**
- * Converts Aecom noise logger file
+ * Converts Cube noise logger file
  */
 export class CubeNoiseConverter extends Converter {
   convert (input: Buffer): JtsDocument {
@@ -38,9 +38,9 @@ export class CubeNoiseConverter extends Converter {
         break
       }
 
-      for (const header of headers) {
-        const ts = new Date(`${logDate} ${row.Time}`)
+      const ts = new Date(`${logDate} ${row.Time}`)
 
+      for (const header of headers) {
         if (header === 'Latitude' || header === 'Longitude') {
           allSeries[header].insert({ timestamp: ts, value: row[header] })
         } else {

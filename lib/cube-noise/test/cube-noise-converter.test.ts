@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import { CubeNoiseConverter } from '../cube-noise-converter'
 
-describe('Unit test for Aecom Noise converter', function () {
+describe('Unit test for Cube Noise converter', function () {
   it('converts sample file', async () => {
     const converter = new CubeNoiseConverter()
     const buff = fs.readFileSync('lib/cube-noise/test/input.dat')

@@ -2,8 +2,9 @@ import { JtsDocument } from '@eagle-io/timeseries'
 import { Converter } from './converter'
 import { SampleConverter } from './lib/sample/sample-converter'
 import { QuantAQModulairConverter } from './lib/quantaq-modulair/quantaq-modulair-converter'
-import { AecomNoiseConverter } from './lib/aecom-noise/aecom-noise-converter'
-import { AecomVibrationConverter } from './lib/aecom-vibration/aecom-vibration-converter'
+import { CubeNoiseConverter } from './lib/cube-noise/cube-noise-converter'
+import { SyscomVibrationConverter } from './lib/syscom-vibration/syscom-vibration-converter'
+import * as fs from 'fs'
 
 interface ConverterInput {
   payload: string
@@ -29,10 +30,10 @@ export const quantAqModulairConverter = async (input: ConverterInput): Promise<J
   return convert(new QuantAQModulairConverter(), input)
 }
 
-export const aecomNoiseConverter = async (input: ConverterInput): Promise<JtsDocument> => {
-  return convert(new AecomNoiseConverter(), input)
+export const cubeNoiseConverter = async (input: ConverterInput): Promise<JtsDocument> => {
+  return convert(new CubeNoiseConverter(), input)
 }
 
-export const aecomVibrationConverter = async (input: ConverterInput): Promise<JtsDocument> => {
-  return convert(new AecomVibrationConverter(), input)
+export const syscomVibrationConverter = async (input: ConverterInput): Promise<JtsDocument> => {
+  return convert(new SyscomVibrationConverter(), input)
 }
