@@ -5,7 +5,7 @@ import { parse } from 'csv-parse/sync'
 /**
  * Converts Aecom noise logger file
  */
-export class AecomNoiseConverter extends Converter {
+export class CubeNoiseConverter extends Converter {
   convert (input: Buffer): JtsDocument {
     interface SeriesObject {
       [key: string]: any

@@ -65,8 +65,8 @@ Resources:
   AecomNoise:
     Type: AWS::Serverless::Function
     Properties:
-      Description: AECOM Noise Sensor
-      Handler: index.aecomNoiseConverter
+      Description: 01dB CUBE
+      Handler: index.cubeNoiseConverter
       Policies:
         - AWSLambdaBasicExecutionRole
       Tags:
