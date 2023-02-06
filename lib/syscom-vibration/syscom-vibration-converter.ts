@@ -6,11 +6,9 @@ import { Converter } from '../../converter'
  */
 export class SyscomVibrationConverter extends Converter {
   convert (input: Buffer): JtsDocument {
-    interface SeriesObject {
-      [key: string]: any
-  }
-
-    const allSeries: SeriesObject = {}
+    const series: {
+    [key: string]: any
+  } = {}
 
     let startDate: string | undefined = ''
     let startTime: string | undefined = ''
@@ -34,12 +32,9 @@ export class SyscomVibrationConverter extends Converter {
             const dataHeader = String(records[i].split('=').pop())
             if (dataHeader !== 'Time') {
               headers.push(dataHeader)
+              series[dataHeader] = new TimeSeries({ name: dataHeader, type: 'NUMBER' }) // Create JTS series for each data series except Time
             }
             i = i + 1
-          }
-          // Create JTS series for each data series except Time
-          for (const header of headers) {
-            allSeries[header] = new TimeSeries({ name: header, type: 'NUMBER' })
           }
         }
       } else if (row !== '') {
@@ -48,13 +43,13 @@ export class SyscomVibrationConverter extends Converter {
         const ts = new Date(baseTs.getTime() + Number(dataRow[0]) * 1000) // Each row contains a time offset from the base in seconds
 
         for (const [index, header] of headers.entries()) {
-          allSeries[header].insert({ timestamp: ts, value: Number(dataRow[index + 1]) })
+          series[header].insert({ timestamp: ts, value: Number(dataRow[index + 1]) })
         }
       } else {
         break // Stop processing after first empty line
       }
     }
 
-    return new JtsDocument({ series: Object.values(allSeries) })
+    return new JtsDocument({ series: Object.values(series) })
   }
 }
