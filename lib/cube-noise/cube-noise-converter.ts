@@ -7,7 +7,7 @@ import { parse } from 'csv-parse/sync'
  */
 export class CubeNoiseConverter extends Converter {
   convert (input: Buffer): JtsDocument {
-    const allSeries: {
+    const series: {
       [key: string]: any
     } = {}
 
@@ -23,28 +23,26 @@ export class CubeNoiseConverter extends Converter {
       return (m !== 'Time' && /^[^0-9]/.test(m))
     })
 
-    // Create JTS series for each data series
     for (const header of headers) {
-      allSeries[header] = new TimeSeries({ name: header, type: 'NUMBER' })
-    }
+      // Create JTS series for each data series
+      series[header] = new TimeSeries({ name: header, type: 'NUMBER' })
 
-    for (const row of records) {
-      // Stop processing file after the first blank row
-      if (row.Time === '') {
-        break
-      }
+      for (const row of records) {
+        // Stop processing file after the first blank row
+        if (row.Time === '') {
+          break
+        }
 
-      const ts = new Date(`${logDate} ${row.Time}`)
+        const ts = new Date(`${logDate} ${row.Time}`)
 
-      for (const header of headers) {
         if (header === 'Latitude' || header === 'Longitude') {
-          allSeries[header].insert({ timestamp: ts, value: row[header] })
+          series[header].insert({ timestamp: ts, value: row[header] })
         } else {
-          allSeries[header].insert({ timestamp: ts, value: Number(row[header]) })
+          series[header].insert({ timestamp: ts, value: Number(row[header]) })
         }
       }
     }
 
-    return new JtsDocument({ series: Object.values(allSeries) })
+    return new JtsDocument({ series: Object.values(series) })
   }
 }
