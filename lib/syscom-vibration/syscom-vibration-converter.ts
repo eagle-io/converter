@@ -29,7 +29,7 @@ export class SyscomVibrationConverter extends Converter {
         if (headers.length === 0 && row.startsWith('# [Columns]')) {
           let i = index + 1
           while (/# \d/.test(records[i])) { // Header names are on rows that start with a # and number
-            const dataHeader = String(records[i].split('=').pop())
+            const dataHeader = String(records[i].split('=').pop()).trim()
             if (dataHeader !== 'Time') {
               headers.push(dataHeader)
               series[dataHeader] = new TimeSeries({ name: dataHeader, type: 'NUMBER' }) // Create JTS series for each data series except Time
