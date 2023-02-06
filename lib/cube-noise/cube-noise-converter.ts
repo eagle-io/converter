@@ -7,24 +7,20 @@ import { parse } from 'csv-parse/sync'
  */
 export class CubeNoiseConverter extends Converter {
   convert (input: Buffer): JtsDocument {
-    interface SeriesObject {
+    const allSeries: {
       [key: string]: any
-  }
-
-    const allSeries: SeriesObject = {}
+    } = {}
 
     const data = input.toString('utf-8')
-    const firstLineIndex = data.indexOf('\n')
-    const csv = data.substring(firstLineIndex + 1) // Remove first line to process leftover string as csv
-    const firstLine = data.substring(0, firstLineIndex)
+    const records = parse(data, { delimiter: ';', relax_column_count: true, columns: true, from_line: 2 })
 
-    const records = parse(csv, { delimiter: ';', relax_column_count: true, columns: true })
+    // Extract date from first line
+    const firstLine = data.substring(0, data.indexOf('\n'))
     const logDate = firstLine.split(';')[8] // Date is always stored in this location
 
-    // Generate list of all data series. Removes duplicate headers
-    const fileHeader = Object.values(csv.split('\n', 1)[0].split(';'))
-    const headers = fileHeader.filter(m => {
-      return (m !== 'Time' && fileHeader.indexOf(m) === fileHeader.lastIndexOf(m))
+    // Generate list of all data series. Removes headers that start with numbers
+    const headers = Object.keys(records[0]).filter(m => {
+      return (m !== 'Time' && /^[^0-9]/.test(m))
     })
 
     // Create JTS series for each data series

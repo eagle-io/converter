@@ -6,11 +6,9 @@ import { Converter } from '../../converter'
  */
 export class SyscomVibrationConverter extends Converter {
   convert (input: Buffer): JtsDocument {
-    interface SeriesObject {
-      [key: string]: any
-  }
-
-    const allSeries: SeriesObject = {}
+    const allSeries: {
+    [key: string]: any
+  } = {}
 
     let startDate: string | undefined = ''
     let startTime: string | undefined = ''
