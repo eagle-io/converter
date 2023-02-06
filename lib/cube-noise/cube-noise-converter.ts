@@ -22,10 +22,11 @@ export class CubeNoiseConverter extends Converter {
     const headers = Object.keys(records[0]).filter(m => {
       return (m !== 'Time' && /^[^0-9]/.test(m))
     })
+    const textHeaders = ['Latitude', 'Longitude']
 
     for (const header of headers) {
       // Create JTS series for each data series
-      series[header] = new TimeSeries({ name: header, type: 'NUMBER' })
+      series[header] = new TimeSeries({ name: header, type: textHeaders.includes(header) ? 'TEXT' : 'NUMBER' })
 
       for (const row of records) {
         // Stop processing file after the first blank row
@@ -34,12 +35,7 @@ export class CubeNoiseConverter extends Converter {
         }
 
         const ts = new Date(`${logDate} ${row.Time}`)
-
-        if (header === 'Latitude' || header === 'Longitude') {
-          series[header].insert({ timestamp: ts, value: row[header] })
-        } else {
-          series[header].insert({ timestamp: ts, value: Number(row[header]) })
-        }
+        series[header].insert({ timestamp: ts, value: textHeaders.includes(header) ? row[header] : Number(row[header]) })
       }
     }
 
