@@ -17,5 +17,10 @@ blocks:
             - checkout
             - sam build
             - sam deploy
+      epilogue:
+        on_pass:
+          commands:
+            - "curl -H 'x-api-key: $ADMIN_API_KEY' -X POST https://app.eagle.io/api/admin/system/config/reload"
       secrets:
         - name: aws-cli-prod-creds
+        - name: frontend-secrets

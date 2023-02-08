@@ -1,0 +1,4 @@
+timestamp,first,second,third
+2022-09-01T14:01:01,3.5,apple,true
+2022-09-01T14:01:02,5.7,banana,false
+2022-09-01T14:01:03,7.8,melon,true
