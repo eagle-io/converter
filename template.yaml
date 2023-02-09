@@ -72,6 +72,7 @@ Resources:
         - AWSLambdaBasicExecutionRole
       Tags:
         Scope: private
+        UseSourceTimezone: true
     Metadata:
       BuildMethod: esbuild
       BuildProperties:
@@ -89,6 +90,7 @@ Resources:
         - AWSLambdaBasicExecutionRole
       Tags:
         Scope: private
+        UseSourceTimezone: true
     Metadata:
       BuildMethod: esbuild
       BuildProperties:

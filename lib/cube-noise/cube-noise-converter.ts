@@ -6,7 +6,7 @@ import { parse } from 'csv-parse/sync'
  * Converts Cube noise logger file
  */
 export class CubeNoiseConverter extends Converter {
-  convert (input: Buffer): JtsDocument {
+  convert (input: Buffer, timezone: string): JtsDocument {
     const series: {
       [key: string]: any
     } = {}
@@ -34,7 +34,7 @@ export class CubeNoiseConverter extends Converter {
           break
         }
 
-        const ts = new Date(`${logDate} ${row.Time}`)
+        const ts = this.dayjs.tz(`${logDate} ${row.Time}`, timezone)
         series[header].insert({ timestamp: ts, value: textHeaders.includes(header) ? row[header] : Number(row[header]) })
       }
     }
