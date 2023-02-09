@@ -6,7 +6,7 @@ import { parse } from 'csv-parse/sync'
  * Converts Cube noise logger file
  */
 export class CubeNoiseConverter extends Converter {
-  convert (input: Buffer): JtsDocument {
+  convert (input: Buffer, timezone: string): JtsDocument {
     const series: {
       [key: string]: any
     } = {}
@@ -22,10 +22,11 @@ export class CubeNoiseConverter extends Converter {
     const headers = Object.keys(records[0]).filter(m => {
       return (m !== 'Time' && /^[^0-9]/.test(m))
     })
+    const textHeaders = ['Latitude', 'Longitude']
 
     for (const header of headers) {
       // Create JTS series for each data series
-      series[header] = new TimeSeries({ name: header, type: 'NUMBER' })
+      series[header] = new TimeSeries({ name: header, type: textHeaders.includes(header) ? 'TEXT' : 'NUMBER' })
 
       for (const row of records) {
         // Stop processing file after the first blank row
@@ -33,13 +34,8 @@ export class CubeNoiseConverter extends Converter {
           break
         }
 
-        const ts = new Date(`${logDate} ${row.Time}`)
-
-        if (header === 'Latitude' || header === 'Longitude') {
-          series[header].insert({ timestamp: ts, value: row[header] })
-        } else {
-          series[header].insert({ timestamp: ts, value: Number(row[header]) })
-        }
+        const ts = this.dayjs.tz(`${logDate} ${row.Time}`, timezone)
+        series[header].insert({ timestamp: ts, value: textHeaders.includes(header) ? row[header] : Number(row[header]) })
       }
     }
 

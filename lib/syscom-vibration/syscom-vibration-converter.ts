@@ -5,7 +5,7 @@ import { Converter } from '../../converter'
  * Converts Syscom vibration logger file
  */
 export class SyscomVibrationConverter extends Converter {
-  convert (input: Buffer): JtsDocument {
+  convert (input: Buffer, timezone: string): JtsDocument {
     const series: {
     [key: string]: any
   } = {}
@@ -39,8 +39,8 @@ export class SyscomVibrationConverter extends Converter {
         }
       } else if (row !== '') {
         const dataRow = row.split(' ')
-        const baseTs = new Date(`${startDate} ${startTime}`)
-        const ts = new Date(baseTs.getTime() + Number(dataRow[0]) * 1000) // Each row contains a time offset from the base in seconds
+        const baseTs = this.dayjs.tz(`${startDate} ${startTime}`, timezone)
+        const ts = this.dayjs.tz(baseTs.valueOf() + Number(dataRow[0]) * 1000, timezone) // Each row contains a time offset from the base in seconds
 
         for (const [index, header] of headers.entries()) {
           series[header].insert({ timestamp: ts, value: Number(dataRow[index + 1]) })
