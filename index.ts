@@ -7,6 +7,10 @@ import { SyscomVibrationConverter } from './lib/syscom-vibration/syscom-vibratio
 import { SampleWithZoneConverter } from './lib/sample-with-zone/sample-with-zone-converter'
 
 interface ConverterInput {
+  filename: string,
+  size: string,
+  modifiedTime: string,
+  receivedTime: string,
   payload: string,
   timezone: string
 }
@@ -15,7 +19,7 @@ function convert (converter: Converter, input: ConverterInput): JtsDocument {
   const payload = Buffer.from(input.payload, 'base64')
   const output: JtsDocument = converter.convert(payload, input.timezone)
 
-  console.log(`Converted ${payload.length} bytes to ${output.series.length} series in zone '${input.timezone}' with ${output.series.reduce((sum, current) => sum + current.length, 0)} fields in total`)
+  console.log(`Converted ${input.filename} [${input.size} bytes] to ${output.series.length} series in zone '${input.timezone}' with ${output.series.reduce((sum, current) => sum + current.length, 0)} fields in total`)
   console.log(`INPUT: ${payload.toString()}`)
   console.log(`OUTPUT: ${output.toString()}`)
 
