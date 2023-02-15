@@ -4,7 +4,7 @@ Description: Library of functions to convert binary timeseries data to JTS
 
 Globals:
   Function:
-    Timeout: 10
+    Timeout: 20
     Runtime: nodejs16.x
     Architectures:
       - x86_64
