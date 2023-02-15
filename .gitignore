@@ -1,6 +1,8 @@
 .idea
 .aws-sam
-event.json
+*.json
+*.zlib
+
 .history
 .vscode
 

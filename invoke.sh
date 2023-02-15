@@ -17,5 +17,11 @@ if [ -z "$2" ]; then
 fi
 input="$2"
 
-echo {\"payload\":\"`base64 -i $input`\"} > event.json
-sam local invoke $converter --event event.json
+# gzip + base64 encode input
+jq -n -f request.jq --arg payload `cat $input |gzip -c |base64` > request.json
+
+# invoke converter with pre-baked request
+sam local invoke $converter --event request.json > response.json
+
+# base64 decode + gunzip output
+jq -r .payload response.json |base64 --decode |gzip -dc |jq

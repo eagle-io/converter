@@ -5,44 +5,60 @@ import { QuantAQModulairConverter } from './lib/quantaq-modulair/quantaq-modulai
 import { CubeNoiseConverter } from './lib/cube-noise/cube-noise-converter'
 import { SyscomVibrationConverter } from './lib/syscom-vibration/syscom-vibration-converter'
 import { SampleWithZoneConverter } from './lib/sample-with-zone/sample-with-zone-converter'
+import { gzipSync, gunzipSync } from 'node:zlib'
 
 interface ConverterInput {
   filename: string,
   size: string,
   modifiedTime: string,
   receivedTime: string,
-  payload: string,
+  payload: string, // gzip compressed, base64 encoded
   timezone: string
 }
 
-function convert (converter: Converter, input: ConverterInput): JtsDocument {
-  const payload = Buffer.from(input.payload, 'base64')
-  const output: JtsDocument = converter.convert(payload, input.timezone)
+interface ConverterOutput {
+  payload?: string, // gzip compressed, base64 encoded
+  error?: unknown
+}
 
-  console.log(`Converted ${input.filename} [${input.size} bytes] to ${output.series.length} series in zone '${input.timezone}' with ${output.series.reduce((sum, current) => sum + current.length, 0)} fields in total`)
-  console.log(`INPUT: ${payload.toString()}`)
-  console.log(`OUTPUT: ${output.toString()}`)
+function convert (converter: Converter, input: ConverterInput): ConverterOutput {
+  try {
+    const payload = gunzipSync(Buffer.from(input.payload, 'base64'))
+    const output: JtsDocument = converter.convert(payload, input.timezone)
 
-  return output
+    console.log(`Converted ${input.filename} [${input.size} bytes] to ${output.series.length} series in zone '${input.timezone}' with ${output.series.reduce((sum, current) => sum + current.length, 0)} fields in total`)
+    console.log(`INPUT: ${payload.toString()}`)
+    console.log(`OUTPUT: ${output.toString()}`)
+
+    return {
+      payload: gzipSync(output.toString()).toString('base64')
+    }
+  } catch (e: unknown) {
+    console.error(`ERROR: ${e}`)
+
+    return {
+      error: e
+    }
+  }
 }
 
 // https://docs.aws.amazon.com/lambda/latest/dg/typescript-handler.html
-export const sampleConverter = async (input: ConverterInput): Promise<JtsDocument> => {
+export const sampleConverter = async (input: ConverterInput): Promise<ConverterOutput> => {
   return convert(new SampleConverter(), input)
 }
 
-export const sampleWithZoneConverter = async (input: ConverterInput): Promise<JtsDocument> => {
+export const sampleWithZoneConverter = async (input: ConverterInput): Promise<ConverterOutput> => {
   return convert(new SampleWithZoneConverter(), input)
 }
 
-export const quantAqModulairConverter = async (input: ConverterInput): Promise<JtsDocument> => {
+export const quantAqModulairConverter = async (input: ConverterInput): Promise<ConverterOutput> => {
   return convert(new QuantAQModulairConverter(), input)
 }
 
-export const cubeNoiseConverter = async (input: ConverterInput): Promise<JtsDocument> => {
+export const cubeNoiseConverter = async (input: ConverterInput): Promise<ConverterOutput> => {
   return convert(new CubeNoiseConverter(), input)
 }
 
-export const syscomVibrationConverter = async (input: ConverterInput): Promise<JtsDocument> => {
+export const syscomVibrationConverter = async (input: ConverterInput): Promise<ConverterOutput> => {
   return convert(new SyscomVibrationConverter(), input)
 }
