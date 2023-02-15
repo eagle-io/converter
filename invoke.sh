@@ -5,16 +5,13 @@ set -e
 # this script invokes the specified converter, passing the specified file as input in the expected format
 # e.g. ./invoke.sh Sample lib/sample/test/input.dat
 
-if [ -z "$1" ]; then
-    echo "ERROR: must specify converter"
-    exit 1;
+if [ "$#" -ne 2 ]; then
+  echo "Usage: $0 converter file"
+  echo "converters: `sam local invoke 2>&1 | grep -o '\[.*]'`"
+  exit 1;
 fi
-converter="$1"
 
-if [ -z "$2" ]; then
-    echo "ERROR: must specify input file"
-    exit 1;
-fi
+converter="$1"
 input="$2"
 
 # gzip + base64 encode input
