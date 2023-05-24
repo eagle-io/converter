@@ -6,7 +6,7 @@ import { parse } from 'csv-parse/sync'
  * Converts sample timeseries CSV -> JTS.
  */
 export class SampleConverter extends Converter {
-  convert (input: Buffer): JtsDocument {
+  convert (input: Buffer, timezone: string): JtsDocument {
     const series1 = new TimeSeries({ name: 'first', type: 'NUMBER' })
     const series2 = new TimeSeries({ name: 'second', type: 'TEXT' })
     const series3 = new TimeSeries({ name: 'third', type: 'TEXT' })

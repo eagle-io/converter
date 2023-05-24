@@ -1,0 +1,85 @@
+{
+    "id": "250200370",
+    "name": "KONIECZNO",
+    "status": {
+        "id": 105306800,
+        "name": "250200370",
+        "description": "KONIECZNO",
+        "river": "Nida (216)",
+        "status": 0,
+        "precip": {
+            "date": "2023-05-22T16:00:00Z",
+            "value": 0.0000,
+            "dreId": 105306800,
+            "operationId": "OPAD_SUM_GODZ",
+            "parameterId": "B00606S",
+            "versionId": -1,
+            "id": 18703910943801
+        },
+        "precipDaily": {
+            "date": "2023-05-22T06:00:00Z",
+            "value": 0.0000,
+            "dreId": 105306800,
+            "operationId": "OPAD_SUM_DOB",
+            "parameterId": "B00604S",
+            "versionId": -1,
+            "id": 18703911163501
+        },
+        "precip3HoursSum": 0.0,
+        "precip6HoursSum": 0.0,
+        "precip12HoursSum": 0.0,
+        "precip24HoursSum": 0.0,
+        "maxDailyPrecipValue": 60.9,
+        "maxDailyPrecipDate": "2021-08-06",
+        "maxHourPrecipValue": 2.5,
+        "province": "świętokrzyskie",
+        "note": null
+    },
+    "state": "no-precip",
+    "connections": {
+        "hydroUp": {
+            "item1": "150200010",
+            "item2": "Wisla_do_Sanu",
+            "item3": "MNISZEK",
+            "item4": "hydro"
+        },
+        "hydroDown": null,
+        "meteo": []
+    },
+    "hourlyPrecipRecords": [
+        {
+            "date": "2023-05-20T16:00:00Z",
+            "value": 1.2345,
+            "dreId": 105306800,
+            "operationId": "OPAD_SUM_GODZ",
+            "parameterId": "B00606S",
+            "versionId": -1,
+            "id": 18693546522801
+        },
+        {
+            "date": "2023-05-20T17:00:00Z",
+            "value": 3.456,
+            "dreId": 105306800,
+            "operationId": "OPAD_SUM_GODZ",
+            "parameterId": "B00606S",
+            "versionId": -1,
+            "id": 18694065936301
+        },
+        {
+            "date": "2023-05-20T18:00:00Z",
+            "value": 7.89,
+            "dreId": 105306800,
+            "operationId": "OPAD_SUM_GODZ",
+            "parameterId": "B00606S",
+            "versionId": -1,
+            "id": 18694620045001
+        }
+    ],
+    "airTemperatureRecords": [],
+    "windDirectionTelRecords": [],
+    "windDirectionObsRecords": [],
+    "windVelocityTelRecords": [],
+    "windVelocityObsRecords": [],
+    "windMaxVelocityRecords": [],
+    "dataClause": null
+}
