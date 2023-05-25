@@ -1,9 +1,9 @@
 import * as fs from 'fs'
-import { daIMGWjsonConverter } from '../daIMGWjson-converter'
+import { daimgwjsonConverter } from '../daimgwjson-converter'
 
 describe('Unit test for daIMGWjson', function () {
   it('converts sample file', async () => {
-    const converter = new daIMGWjsonConverter()
+    const converter = new daimgwjsonConverter()
     const buff = fs.readFileSync('lib/daIMGWjson/test/input.dat')
     const result = converter.convert(buff)
 

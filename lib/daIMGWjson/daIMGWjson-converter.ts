@@ -3,12 +3,12 @@ import { Converter } from '../../converter'
 
 /**
  * Convert the JSON data from IMGW 
+ * exemple : https://hydro.imgw.pl/api/station/meteo/?id=250200370
  * 
  *
  */
-export class daIMGWjsonConverter extends Converter {
+export class daimgwjsonConverter extends Converter {
   convert (input: Buffer): JtsDocument {
-//    const series1 = new TimeSeries({ name: 'hourlyPrecip', type: 'NUMBER' })
     const series1 = new TimeSeries({ name: 'hourlyPrecip'})    
     // Get the records
     const records = JSON.parse(input.toString())
