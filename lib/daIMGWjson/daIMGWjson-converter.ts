@@ -41,8 +41,8 @@ export class daimgwjsonConverter extends Converter {
 	})
 
 	// Get daily precipitation
-	const ts = new Date(records.precipDaily.date)
-	const precipDaily = records.precipDaily.value
+	const ts = new Date(records.status.precipDaily.date)
+	const precipDaily = records.status.precipDaily.value
 	series4.insert({ timestamp: ts, value: Number(precipDaily) })
 	
     return new JtsDocument({ series: [series1, series2, series3, series4] })
