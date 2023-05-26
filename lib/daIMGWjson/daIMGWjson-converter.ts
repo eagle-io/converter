@@ -10,8 +10,8 @@ import { Converter } from '../../converter'
 export class daimgwjsonConverter extends Converter {
   convert (input: Buffer): JtsDocument {
     const series1 = new TimeSeries({ name: 'hourlyPrecip'})  
-    const series2 = new TimeSeries({ name: 'airTemperatureRecords'})  
-    const series3 = new TimeSeries({ name: 'windVelocityObsRecords'})  
+    const series2 = new TimeSeries({ name: 'airTemperature'})  
+    const series3 = new TimeSeries({ name: 'windVelocity'})  
 
     // Get the records
     const records = JSON.parse(input.toString())
@@ -35,9 +35,9 @@ export class daimgwjsonConverter extends Converter {
       date: string,
       value: string }) => {
       const ts = new Date(row.date)
-      series1.insert({ timestamp: ts, value: Number(row.value) })	
+      series3.insert({ timestamp: ts, value: Number(row.value) })	
 	})
 	  
-    return new JtsDocument({ series: [series1] })
+    return new JtsDocument({ series: [series1, series2, series3] })
   }
 }
