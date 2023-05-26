@@ -11,7 +11,9 @@ export class daimgwjsonConverter extends Converter {
   convert (input: Buffer): JtsDocument {
     const series1 = new TimeSeries({ name: 'hourlyPrecip'})  
     const series2 = new TimeSeries({ name: 'airTemperature'})  
-    const series3 = new TimeSeries({ name: 'windVelocity'})  
+    const series3 = new TimeSeries({ name: 'windVelocity'})
+	const series4 = new TimeSeries({ name: 'precipDaily'})
+	
 
     // Get the records
     const records = JSON.parse(input.toString())
@@ -37,7 +39,12 @@ export class daimgwjsonConverter extends Converter {
       const ts = new Date(row.date)
       series3.insert({ timestamp: ts, value: Number(row.value) })	
 	})
-	  
-    return new JtsDocument({ series: [series1, series2, series3] })
+
+	// Get daily precipitation
+	const ts = new Date(records.precipDaily.date)
+	const precipDaily = records.precipDaily.value
+	series4.insert({ timestamp: ts, value: Number(precipDaily) })
+	
+    return new JtsDocument({ series: [series1, series2, series3, series4] })
   }
 }
