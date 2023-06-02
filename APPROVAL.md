@@ -1,13 +1,16 @@
-# Approving a converter
+# converter approval
 
-eagle.io staff should consider the following checklist when [approving a pull request](https://www.jetbrains.com/help/idea/work-with-github-pull-requests.html#incoming_pull_requests):
+eagle.io development team should consider the following checklist when [approving a pull request](https://www.jetbrains.com/help/idea/work-with-github-pull-requests.html#incoming_pull_requests):
 
 - converter name should be a meaningful description of data origin
 - converter should translate all data in the input format
-- tests should pass locally, e.g. `npm run test` 
-- file names should conform to `kebab-case`
-- class names should conform to `UpperCamelCase`
-- converter executes locally via `invoke.sh` (see below)
+- confirm tests pass locally, e.g. `npm run test` 
+- confirm file names use `kebab-case`
+- confirm class names use `UpperCamelCase`
+- add converter bindings (see below)
+- confirm converter can be invoked locally (see below)
+- merge and push changes
+- deploy converters
 
 ## Adding converter bindings
 
@@ -15,7 +18,7 @@ deployment of a `converter` requires bindings to be included by the approving st
 
 `index.ts` should define a function that invokes the new converter as follows:
 
-```
+```ts
 export const sampleConverter = async (input: ConverterInput): Promise<ConverterOutput> => {
   return convert(new SampleConverter(), input)
 }
@@ -27,7 +30,7 @@ export const sampleConverter = async (input: ConverterInput): Promise<ConverterO
 | `SampleConverter` | defines the class name of the new converter                  |
 
 `template.yml` should include a section defining a new lambda function as follows:
-```
+```yml
 Sample:
   Type: AWS::Serverless::Function
   Properties:
@@ -56,11 +59,23 @@ Sample:
 
 a converter should be considered `Scope: public` if the format origin is likely to be useful to the wider eagle.io community _and_ the implementation/testing is sufficiently robust to allow for all format permutations. `public` converters should demand a high degree of scrutiny as any changes could affect data ingestion for many accounts.
 
-## Invoking a converter
+## Invoking a converter locally
 
 converter functions are constructed using the [AWS Serverless Application Model](https://aws.amazon.com/serverless/sam/) and can be tested locally prior to deployment using the `aws-sam-cli`. SAM provides a method to invoke a converter in a local docker environment (`sam local invoke`), and `invoke.sh` is a convenience script to marshall data to a converter in the expected format.
 
-```
+```shell
 sam build
 ./invoke.sh Sample lib/sample/test/input.dat
 ```
+
+## Deploying converters
+
+converters are tested on checkin and can be [deployed via CI](https://eagle-io.semaphoreci.com/projects/converter).
+
+![alt text](images/converter-deploy.png)
+
+## Enabling private converters
+
+`public` converters are automatically made available to users but `private` converters must be explicitly enabled on an account via the [admin console](https://app.eagle.io/admin/accounts).
+
+![alt text](images/converter-enable.png)
