@@ -8,7 +8,7 @@ import { Converter } from '../../converter'
  *
  */
 export class DaImgwJsonConverter extends Converter {
-  convert (input: Buffer, timezone: string): JtsDocument {
+  convert (input: Buffer): JtsDocument {
     const series1 = new TimeSeries({ name: 'hourlyPrecip' })
     const series2 = new TimeSeries({ name: 'airTemperature' })
     const series3 = new TimeSeries({ name: 'windVelocity' })
