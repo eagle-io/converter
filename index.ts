@@ -6,13 +6,20 @@ import { CubeNoiseConverter } from './lib/cube-noise/cube-noise-converter'
 import { SyscomVibrationConverter } from './lib/syscom-vibration/syscom-vibration-converter'
 import { SampleWithZoneConverter } from './lib/sample-with-zone/sample-with-zone-converter'
 import { gzipSync, gunzipSync } from 'node:zlib'
+import { DaImgwJsonConverter } from './lib/daimgwjson/daimgwjson-converter'
 
 interface ConverterInput {
+  // filename of received payload (if available)
   filename: string,
+  // number of bytes in payload
   size: string,
+  // timestamp payload was stored on remote service
   modifiedTime: string,
+  // timestamp payload was received by eagle.io
   receivedTime: string,
-  payload: string, // gzip compressed, base64 encoded
+  // payload bytes, gzip compressed, base64 encoded
+  payload: string,
+  // datasource timezone
   timezone: string
 }
 
@@ -61,4 +68,8 @@ export const cubeNoiseConverter = async (input: ConverterInput): Promise<Convert
 
 export const syscomVibrationConverter = async (input: ConverterInput): Promise<ConverterOutput> => {
   return convert(new SyscomVibrationConverter(), input)
+}
+
+export const imgwMetConverter = async (input: ConverterInput): Promise<ConverterOutput> => {
+  return convert(new DaImgwJsonConverter(), input)
 }
