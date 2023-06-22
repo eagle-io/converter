@@ -13,7 +13,7 @@
   },
   "scripts": {
     "unit": "jest",
-    "lint": "eslint '**/*.ts' --quiet --fix",
+    "lint": "eslint --quiet --fix **/*.ts",
     "compile": "tsc",
     "test": "npm run compile && npm run unit && npm run lint"
   },
