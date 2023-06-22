@@ -9,7 +9,6 @@ describe('Unit test for dacortexjson', function () {
 
     expect(result.series[0].first.timestamp).toEqual(new Date('2023-05-23T07:26:00.921Z'))
 
-
     expect(result.series[0].values).toEqual([766.86])
     expect(result.series[0].name).toEqual('Absolute level')
     expect(result.series[0].type).toEqual('NUMBER')
@@ -21,7 +20,5 @@ describe('Unit test for dacortexjson', function () {
     expect(result.series[5].values).toEqual(['False'])
     expect(result.series[5].name).toEqual('Failure')
     expect(result.series[5].first.timestamp).toEqual(new Date('2023-05-23T07:26:00.921Z'))
-
   })
 })
-
