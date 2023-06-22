@@ -1,0 +1,21 @@
+{ "payloadType": "CORTEX_Default_Array",
+"timestamp": "2023-05-23T07:26:00.921Z",
+"version":"1.0",
+"UUID":"",
+"site":"0451",
+"topic":"PRD/CORTEX/LOCAL/WRM/0451/CREATION/KEPWARE/BH_FV5",
+"source":"io/eagle/source/order-bra-feet",
+"payload":{ 
+         "name": ["Absolute level","Conductivity","Flow rate","Pressure","Relative level","Failure"],
+         "value":[766.860000000000014,246.599999999999994,5,8.91999999999999993,-30.6000000000000014,"False"],
+         "quality":["true","true","true","true","true","true"],
+         "description":["","","","","",""],
+         "dataType":[ "" , "" , "" , "" , "" , "String" ],
+         "timeStampStart":[ "" , "" , "" , "" , "" , "" ],
+         "timeStampEnd":[ "" , "" , "" , "" , "" , "" ],
+         "uom":[ "" , "" , "" , "" , "" , "" ],
+         "isHistorical":[ "" , "" , "" , "" , "" , "" ],
+         "area":[ "WATER_RESOURCES" , "WATER_RESOURCES" , "WATER_RESOURCES" , "WATER_RESOURCES" , "WATER_RESOURCES" , "WATER_RESOURCES" ],
+         "cell":[ "FV5" , "FV5" , "FV5" , "FV5" , "FV5" , "FV5" ],
+         "equipment":[ "" , "" , "" , "" , "" , "" ]
+          } }
