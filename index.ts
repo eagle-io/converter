@@ -1,3 +1,4 @@
+import { gzipSync, gunzipSync } from 'node:zlib'
 import { JtsDocument } from '@eagle-io/timeseries'
 import { Converter } from './converter'
 import { SampleConverter } from './lib/sample/sample-converter'
@@ -5,8 +6,8 @@ import { QuantAQModulairConverter } from './lib/quantaq-modulair/quantaq-modulai
 import { CubeNoiseConverter } from './lib/cube-noise/cube-noise-converter'
 import { SyscomVibrationConverter } from './lib/syscom-vibration/syscom-vibration-converter'
 import { SampleWithZoneConverter } from './lib/sample-with-zone/sample-with-zone-converter'
-import { gzipSync, gunzipSync } from 'node:zlib'
 import { DaImgwJsonConverter } from './lib/daimgwjson/daimgwjson-converter'
+import { DaCortexJsonConverter } from './lib/dacortexjson/dacortexjson-converter'
 
 interface ConverterInput {
   // filename of received payload (if available)
@@ -72,4 +73,8 @@ export const syscomVibrationConverter = async (input: ConverterInput): Promise<C
 
 export const imgwMetConverter = async (input: ConverterInput): Promise<ConverterOutput> => {
   return convert(new DaImgwJsonConverter(), input)
+}
+
+export const danoneCortexConverter = async (input: ConverterInput): Promise<ConverterOutput> => {
+  return convert(new DaCortexJsonConverter(), input)
 }
