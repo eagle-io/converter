@@ -12,7 +12,7 @@ export class DaCortexJsonConverter extends Converter {
   } = {}
   // Get the records
     const records = JSON.parse(input.toString())
-    const ts = new Date(records.timestamp)
+    const ts = new Date(records.timeStamp)
 
     // Get the headers, measures and dataypes
     const headers = records.payload.name
