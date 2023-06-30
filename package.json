@@ -7,7 +7,7 @@
   "author": "jarrah@eagle.io",
   "license": "GPL 3.0",
   "dependencies": {
-    "@eagle-io/timeseries": "^1.0.2",
+    "@eagle-io/timeseries": "^1.0.5",
     "csv-parse": "^5.3.0",
     "dayjs": "^1.11.7"
   },
