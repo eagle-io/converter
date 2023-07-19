@@ -44,8 +44,15 @@ function convert (converter: Converter, input: ConverterInput): ConverterOutput 
   } catch (e: unknown) {
     console.error(`ERROR: ${e}`)
 
-    return {
-      error: e instanceof Error ? e.message : 'unknown error'
+    if (e instanceof Error) {
+      console.debug(e.stack)
+      return {
+        error: e.message
+      }
+    } else {
+      return {
+        error: 'unknown error'
+      }
     }
   }
 }
