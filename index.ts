@@ -8,6 +8,7 @@ import { SyscomVibrationConverter } from './lib/syscom-vibration/syscom-vibratio
 import { SampleWithZoneConverter } from './lib/sample-with-zone/sample-with-zone-converter'
 import { DaImgwJsonConverter } from './lib/daimgwjson/daimgwjson-converter'
 import { DaCortexJsonConverter } from './lib/dacortexjson/dacortexjson-converter'
+import { KolibriCloudConverter } from './lib/kolibricloud/kolibricloud-converter'
 
 interface ConverterInput {
   // filename of received payload (if available)
@@ -84,4 +85,8 @@ export const imgwMetConverter = async (input: ConverterInput): Promise<Converter
 
 export const danoneCortexConverter = async (input: ConverterInput): Promise<ConverterOutput> => {
   return convert(new DaCortexJsonConverter(), input)
+}
+
+export const kolibriCloudConverter = async (input: ConverterInput): Promise<ConverterOutput> => {
+  return convert(new KolibriCloudConverter(), input)
 }
