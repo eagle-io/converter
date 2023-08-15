@@ -1,5 +1,5 @@
 import * as fs from 'fs'
-import { KolibriCloudConverter } from '../kolibricloud-converter'
+import { KolibriCloudConverter } from '../kolibri-cloud-converter'
 
 describe('Unit test for kolibricloud', function () {
   it('converts sample file', async () => {
