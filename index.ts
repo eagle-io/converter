@@ -8,7 +8,7 @@ import { SyscomVibrationConverter } from './lib/syscom-vibration/syscom-vibratio
 import { SampleWithZoneConverter } from './lib/sample-with-zone/sample-with-zone-converter'
 import { DaImgwJsonConverter } from './lib/daimgwjson/daimgwjson-converter'
 import { DaCortexJsonConverter } from './lib/dacortexjson/dacortexjson-converter'
-import { KolibriCloudConverter } from './lib/kolibricloud/kolibricloud-converter'
+import { KolibriCloudConverter } from './lib/kolibricloud/kolibri-cloud-converter'
 
 interface ConverterInput {
   // filename of received payload (if available)
