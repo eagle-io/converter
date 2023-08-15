@@ -9,6 +9,10 @@ eagle.io development team should consider the following checklist when [approvin
 - confirm class names use `UpperCamelCase`
 - confirm logic is expressed cleanly and reads well
 
+Changes can be committed, then pushed to the Pull Request with the following command:
+
+`git push git@github.com:{contributer-username}/converter {local-branch}:{remote-branch}`
+
 If the pull request is of sufficient quality it can be approved via Intellij or Github; otherwise, feedback can be provided via the pull request comments.
 
 ## Integrating a converter
