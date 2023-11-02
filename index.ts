@@ -9,6 +9,7 @@ import { SampleWithZoneConverter } from './lib/sample-with-zone/sample-with-zone
 import { DaImgwJsonConverter } from './lib/daimgwjson/daimgwjson-converter'
 import { DaCortexJsonConverter } from './lib/dacortexjson/dacortexjson-converter'
 import { KolibriCloudConverter } from './lib/kolibricloud/kolibri-cloud-converter'
+import { AcoemFusionConverter } from './lib/acoem-fusion/acoem-fusion-converter'
 
 interface ConverterInput {
   // filename of received payload (if available)
@@ -89,4 +90,8 @@ export const danoneCortexConverter = async (input: ConverterInput): Promise<Conv
 
 export const kolibriCloudConverter = async (input: ConverterInput): Promise<ConverterOutput> => {
   return convert(new KolibriCloudConverter(), input)
+}
+
+export const acoemFusionConverter = async (input: ConverterInput): Promise<ConverterOutput> => {
+  return convert(new AcoemFusionConverter(), input)
 }
