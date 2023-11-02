@@ -1,0 +1,7 @@
+<PublicRealTimeValuesList version="1">
+<LocalTime>2012/01/04 22:01:01</LocalTime>
+<Values>40.0;41.0;41.0</Values>
+<Spectrum1>40.0;41.0;41.0;41.0;41.0;41.0;41.0;41.0;41.0;41.0;41.0;41.0</Spectrum1>
+<Spectrum2>40.0;41.0;41.0;41.0;41.0;41.0;41.0;41.0;41.0;41.0;41.0;41.0</Spectrum2>
+<Weather>10.0;12.0;0.0;1000.0;34.0;54.0</Weather>
+</PublicRealTimeValuesList>
