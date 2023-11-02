@@ -19,12 +19,14 @@ export class AcoemFusionConverter extends Converter {
     const spec2  = /<Spectrum2>(.*?)<\/Spectrum2>/.exec(xml)
     const weather  = /<Weather>(.*?)<\/Weather>/.exec(xml)
 
+    //payload has timestamp
     if (timestamp != null) {
       //format time and create new date
 
       const ts = this.dayjs.tz(((timestamp[1]).replace("/","-").replace("/","-").replace(" ","T")), timezone)
 
       if (values != null) {
+        //split values by delimeter
         const valuesArray = values[1].split(';')
         for (let i = 0; i < valuesArray.length; i++) {
           const name: string = 'value_'+String(i+1)

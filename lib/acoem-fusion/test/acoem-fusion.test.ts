@@ -32,7 +32,7 @@ describe('Unit test for acoem fusion converter', function () {
     expect(result.series[13].values).toEqual([41.0])
     expect(result.series[14].values).toEqual([41.0])
     expect(result.series[15].values).toEqual([40.0]) //all data included in sample payload
-    expect(result.series[16].values).toEqual([41.0]) //payload example from sensor documentation
+    expect(result.series[16].values).toEqual([41.0]) //payload example from sensor documentation. Can send but the docs aren't public
     expect(result.series[17].values).toEqual([41.0])
     expect(result.series[18].values).toEqual([41.0])
     expect(result.series[19].values).toEqual([41.0])
