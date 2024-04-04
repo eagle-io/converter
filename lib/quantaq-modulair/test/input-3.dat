@@ -1,0 +1,128 @@
+{
+  "data": [
+    {
+      "co": 487.53,
+      "geo": {
+        "lat": null,
+        "lon": null
+      },
+      "met": {
+        "rh": 37.5,
+        "temp": 16.2,
+        "wd": 0,
+        "ws": 0
+      },
+      "model": {
+        "gas": {
+          "co": 14300,
+          "no": 14302,
+          "no2": 14303,
+          "o3": 14301
+        },
+        "pm": {
+          "pm1": 14297,
+          "pm10": 14299,
+          "pm25": 14298
+        }
+      },
+      "no": 6.82,
+      "no2": 9.77,
+      "o3": 14.8,
+      "pm1": 0.03,
+      "pm10": 1.69,
+      "pm25": 0.2,
+      "rh": 37.5,
+      "sn": "MOD-RND-2",
+      "temp": 16.2,
+      "timestamp": "2024-04-04T21:46:37",
+      "timestamp_local": "2024-04-04T17:46:37",
+      "url": "https://api.quant-aq.com/v1/devices/MOD-RND-2/data/121958267"
+    },
+    {
+      "co": 487.05,
+      "geo": {
+        "lat": null,
+        "lon": null
+      },
+      "met": {
+        "rh": 37.6,
+        "temp": 16.2,
+        "wd": 0,
+        "ws": 0
+      },
+      "model": {
+        "gas": {
+          "co": 14300,
+          "no": 14302,
+          "no2": 14303,
+          "o3": 14301
+        },
+        "pm": {
+          "pm1": null,
+          "pm10": null,
+          "pm25": null
+        }
+      },
+      "no": 6.75,
+      "no2": 9.54,
+      "o3": 15.65,
+      "pm1": null,
+      "pm10": null,
+      "pm25": null,
+      "rh": 37.6,
+      "sn": "MOD-RND-2",
+      "temp": 16.2,
+      "timestamp": "2024-04-04T21:45:37",
+      "timestamp_local": "2024-04-04T17:45:37",
+      "url": "https://api.quant-aq.com/v1/devices/MOD-RND-2/data/121958264"
+    },
+    {
+      "co": 473.16,
+      "geo": {
+        "lat": null,
+        "lon": null
+      },
+      "met": {
+        "rh": 37.5,
+        "temp": 16.2,
+        "wd": 0,
+        "ws": 0
+      },
+      "model": {
+        "gas": {
+          "co": 14300,
+          "no": 14302,
+          "no2": 14303,
+          "o3": 14301
+        },
+        "pm": {
+          "pm1": 14297,
+          "pm10": 14299,
+          "pm25": 14298
+        }
+      },
+      "no": 6.16,
+      "no2": 9.77,
+      "o3": 15.39,
+      "pm1": 0.08,
+      "pm10": 0.34,
+      "pm25": 0.18,
+      "rh": 37.5,
+      "sn": "MOD-RND-2",
+      "temp": 16.2,
+      "timestamp": "2024-04-04T21:44:37",
+      "timestamp_local": "2024-04-04T17:44:37",
+      "url": "https://api.quant-aq.com/v1/devices/MOD-RND-2/data/121958265"
+    }
+  ],
+  "meta": {
+    "first_url": "https://api.quant-aq.com/v1/devices/MOD-RND-2/data/?page=1&per_page=100&limit=3&sort=timestamp,desc",
+    "last_url": "https://api.quant-aq.com/v1/devices/MOD-RND-2/data/?page=1&per_page=100&limit=3&sort=timestamp,desc",
+    "next_url": null,
+    "page": 1,
+    "pages": 1,
+    "per_page": 100,
+    "prev_url": null,
+    "total": 3
+  }
+}
