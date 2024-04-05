@@ -5,7 +5,7 @@ agent:
     type: e2-standard-2
   containers:
     - name: main
-      image: 'public.ecr.aws/sam/build-nodejs20.x:latest'
+      image: 'public.ecr.aws/sam/build-nodejs18.x:latest'
 blocks:
   - name: Deploy to Lambda
     task:
