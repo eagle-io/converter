@@ -3,7 +3,6 @@ name: Deploy Converters
 agent:
   machine:
     type: e2-standard-2
-    os_image: ubuntu2204
   containers:
     - name: main
       image: 'public.ecr.aws/sam/build-nodejs20.x:latest'
