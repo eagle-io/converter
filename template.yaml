@@ -164,3 +164,20 @@ Resources:
         Sourcemap: true
         EntryPoints:
           - index.ts
+  DASCaptisV2:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: DAS Captis V2
+      Handler: index.dasCaptisV2Converter
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Tags:
+        Scope: private
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: "es2020"
+        Sourcemap: true
+        EntryPoints:
+          - index.ts
