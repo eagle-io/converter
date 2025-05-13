@@ -5,7 +5,7 @@ import { LogoPlcConverter } from '../siemens-logo-plc-converter'
 describe('LogoPlcConverter Unit Test', () => {
   it('should correctly convert the input.dat file and validate values', () => {
     const converter = new LogoPlcConverter()
-    const filePath = path.join(__dirname, 'input.dat') // Path to the renamed input file
+    const filePath = path.join('lib/siemens-logo-plc-converter/test/input.dat') // Path to the renamed input file
     const inputBuffer = fs.readFileSync(filePath) // Read the file as a buffer
 
     // Convert the input data
