@@ -5,7 +5,7 @@ interface ReportedValue {
   value: number | number[] | undefined
 }
 
-export class LogoPlcConverter extends Converter {
+export class SiemensLogoPlcConverter extends Converter {
   private readonly DATA_TYPE = 'NUMBER'
 
   convert (input: Buffer): JtsDocument {
