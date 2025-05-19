@@ -4,7 +4,7 @@ import { parse } from 'csv-parse/sync'
 
 interface SeriesMap {
     [key: string]: TimeSeries<string | number>;
-  }
+}
 
 export class DASCaptisV2Converter extends Converter {
   convert (input: Buffer): JtsDocument {
@@ -13,11 +13,7 @@ export class DASCaptisV2Converter extends Converter {
     const seriesMap: SeriesMap = {
       event: new TimeSeries({ name: 'eventCode + eventNotes', type: 'TEXT' }),
       battery: new TimeSeries({ name: 'battery', type: 'NUMBER', units: 'V' }),
-      signalStrength: new TimeSeries({ name: 'signalStrength', type: 'NUMBER', units: 'dBm' }),
-      flow: new TimeSeries({ name: 'flow', type: 'NUMBER' }),
-      flow1: new TimeSeries({ name: 'flow1', type: 'NUMBER' }),
-      flow2: new TimeSeries({ name: 'flow2', type: 'NUMBER' }),
-      modbus_flow: new TimeSeries({ name: 'modbus_flow', type: 'NUMBER' })
+      signalStrength: new TimeSeries({ name: 'signalStrength', type: 'NUMBER', units: 'dBm' })
     }
     const serverTime = this.dayjs().toDate()
 
@@ -27,17 +23,13 @@ export class DASCaptisV2Converter extends Converter {
       if (id === '200') {
         const timestamp = this.dayjs(parts[5]).toDate()
         const value = Number(parts[3])
+        const seriesName = parts[1]
 
-        switch (parts[1]) {
-          case 'flow1':
-            seriesMap.flow1.insert({ timestamp, value })
-            break
-          case 'flow2':
-            seriesMap.flow2.insert({ timestamp, value })
-            break
-          case 'flow':
-            seriesMap.modbus_flow.insert({ timestamp, value })
-            break
+        if (seriesName === 'flow' || seriesName === 'flow1' || seriesName === 'flow2') {
+          if (!seriesMap[seriesName]) {
+            seriesMap[seriesName] = new TimeSeries({ name: seriesName, type: 'NUMBER' })
+          }
+          seriesMap[seriesName].insert({ timestamp, value })
         }
         return
       }
@@ -49,6 +41,9 @@ export class DASCaptisV2Converter extends Converter {
 
       if (id === 'l003' && parts[1] && this.dayjs(parts[1]).isValid()) {
         const timestamp = this.dayjs(parts[1]).toDate()
+        if (!seriesMap.flow) {
+          seriesMap.flow = new TimeSeries({ name: 'flow', type: 'NUMBER' })
+        }
         seriesMap.flow.insert({ timestamp, value: Number(parts[2]) })
         return
       }
