@@ -7,21 +7,19 @@ describe('Unit test for Captis converter', function () {
     const buff = fs.readFileSync('lib/das-captis-v2/test/input.dat')
     const result = converter.convert(buff)
 
-    expect(result.series.length).toBeGreaterThanOrEqual(4)
+    expect(result.series.length).toEqual(6)
 
     const eventSeries = result.series.find(s => s.name === 'eventCode + eventNotes')
     const batterySeries = result.series.find(s => s.name === 'battery')
     const signalStrengthSeries = result.series.find(s => s.name === 'signalStrength')
-    const pulseSeries = result.series.find(s => s.name === 'flow')
-    const modbusSeries = result.series.find(s => s.name === 'modbus_flow')
+    const flowSeries = result.series.find(s => s.name === 'flow')
     const modbusFlow1Series = result.series.find(s => s.name === 'flow1')
     const modbusFlow2Series = result.series.find(s => s.name === 'flow2')
 
     expect(eventSeries).toBeDefined()
     expect(batterySeries).toBeDefined()
     expect(signalStrengthSeries).toBeDefined()
-    expect(pulseSeries).toBeDefined()
-    expect(modbusSeries).toBeDefined()
+    expect(flowSeries).toBeDefined()
     expect(modbusFlow1Series).toBeDefined()
     expect(modbusFlow2Series).toBeDefined()
 
@@ -35,14 +33,11 @@ describe('Unit test for Captis converter', function () {
       expect(signalStrengthSeries.first.value).toEqual(-94)
     }
 
-    if (pulseSeries) {
-      expect(pulseSeries.first.timestamp).toEqual(new Date('2019-08-05T07:02:00Z'))
-      expect(pulseSeries.first.value).toEqual(2.0)
-    }
-
-    if (modbusSeries) {
-      expect(modbusSeries.first.timestamp).toEqual(new Date('2019-09-17T03:51:01Z'))
-      expect(modbusSeries.first.value).toEqual(3145728.0)
+    if (flowSeries) {
+      expect(flowSeries.first.timestamp).toEqual(new Date('2019-08-05T07:02:00Z'))
+      expect(flowSeries.first.value).toEqual(2.0)
+      expect(flowSeries.values).toEqual([2.0, 4.0, 3145728.0, 3145729.0])
+      expect(flowSeries.last.timestamp).toEqual(new Date('2019-09-17T04:51:01Z'))
     }
 
     if (modbusFlow1Series) {
