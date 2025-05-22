@@ -13,8 +13,9 @@ export class LogoPlcConverter extends Converter {
       const payload = JSON.parse(input.toString())
       const reported = payload?.state?.reported
 
+      // Handle empty messages
       if (!reported || typeof reported !== 'object') {
-        return new JtsDocument({ series: [] }) // No valid data to process
+        return this.createDummyDocument() // Generate a dummy JTS output
       }
 
       const timestamp = new Date(new Date().toISOString()) // Server UTC time
@@ -42,7 +43,7 @@ export class LogoPlcConverter extends Converter {
 
       return new JtsDocument({ series: seriesList })
     } catch (error) {
-      return this.createErrorDocument(error)
+      return this.createErrorDocument(error) // Handle errors
     }
   }
 
@@ -52,8 +53,39 @@ export class LogoPlcConverter extends Converter {
     return Array.isArray(val) ? val[0] : typeof val === 'number' ? val : undefined
   }
 
+  // Generate a dummy JTS output for empty messages
+  private createDummyDocument (): JtsDocument {
+    const seriesList: TimeSeries<string>[] = []
+
+    seriesList.push({
+      name: 'converter', // Required field from BaseTimeSeries
+      type: 'TEXT', // Required field from BaseTimeSeries
+      records: [
+        {
+          timestamp: new Date('2025-01-01T00:00:00Z'), // Fixed timestamp
+          value: 'Ok' // Dummy numeric value to satisfy TimeSeries<number>
+        }
+      ]
+    } as TimeSeries<string>) // Type assertion to satisfy TypeScript
+
+    return new JtsDocument({ series: seriesList })
+  }
+
+  // Generate a JTS output for error messages
   private createErrorDocument (error: unknown): JtsDocument {
-    console.error('Conversion error:', error instanceof Error ? error.message : 'Unknown error')
-    return new JtsDocument({ series: [] })
+    const seriesList: TimeSeries<string>[] = []
+
+    seriesList.push({
+      name: 'error', // Required field from BaseTimeSeries
+      type: 'TEXT', // Required field from BaseTimeSeries
+      records: [
+        {
+          timestamp: new Date(), // Current timestamp
+          value: error instanceof Error ? `Error ${error.message}` : 'Error Unknown error' // Prefix error message with "Error "
+        }
+      ]
+    } as TimeSeries<string>) // Type assertion to satisfy TimeSeries<string>
+
+    return new JtsDocument({ series: seriesList })
   }
 }

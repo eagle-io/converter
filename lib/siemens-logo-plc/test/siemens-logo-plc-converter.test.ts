@@ -3,8 +3,8 @@ import * as path from 'path'
 import { LogoPlcConverter } from '../siemens-logo-plc-converter'
 
 describe('LogoPlcConverter Unit Test', () => {
+  const converter = new LogoPlcConverter()
   it('should correctly convert the input.dat file and validate values', () => {
-    const converter = new LogoPlcConverter()
     const filePath = path.join(__dirname, 'input.dat') // Path to the renamed input file
     const inputBuffer = fs.readFileSync(filePath) // Read the file as a buffer
 
@@ -84,5 +84,41 @@ describe('LogoPlcConverter Unit Test', () => {
     const timeDifference = Math.abs(systemTime - resultTime)
 
     expect(timeDifference).toBeLessThanOrEqual(10000) // Ensure the difference is within 10 seconds
+  })
+
+  it('should handle empty messages and produce a dummy JTS output', () => {
+    const input = Buffer.from('{}') // Empty message
+    const result = converter.convert(input)
+    // Validate the output structure for empty messages
+    expect(result).toHaveProperty('series')
+    expect(result.series.length).toBe(1)
+    expect(result.series[0].name).toEqual('converter')
+    expect(result.series[0].type).toEqual('TEXT')
+    expect(result.series[0].records.length).toEqual(1)
+    expect(result.series[0].records[0].timestamp.toISOString()).toEqual('2025-01-01T00:00:00.000Z')
+    expect(result.series[0].records[0].value).toEqual('Ok') // Convert to string
+  })
+
+  it('should handle errors and produce an error JTS output', () => {
+    const input = Buffer.from('{ invalid JSON }') // Invalid JSON
+    const result = converter.convert(input)
+    // Validate the output structure for error messages
+    expect(result).toHaveProperty('series')
+    expect(result.series.length).toBe(1)
+    expect(result.series[0]).toHaveProperty('name', 'error')
+    expect(result.series[0]).toHaveProperty('type', 'TEXT')
+    expect(result.series[0].records.length).toEqual(1)
+
+    // Validate the error message and timestamp
+    const errorRecord = result.series[0].records[0]
+    expect(errorRecord).toHaveProperty('value')
+    expect(errorRecord.value).toContain('Error') // Ensure the error message starts with "Error"
+
+    const systemTime = new Date().getTime()
+    const resultTime = new Date(errorRecord.timestamp).getTime()
+    const timeDifference = Math.abs(systemTime - resultTime)
+
+    // Ensure the timestamp is within ~10 seconds of the system time
+    expect(timeDifference).toBeLessThanOrEqual(10000)
   })
 })
