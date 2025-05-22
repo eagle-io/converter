@@ -4,62 +4,65 @@ import { parse } from 'csv-parse/sync'
 
 interface SeriesMap {
     [key: string]: TimeSeries<string | number>;
-  }
+}
 
 export class DASCaptisV2Converter extends Converter {
   convert (input: Buffer): JtsDocument {
     const csv = input.toString('utf-8')
     const records = parse(csv, { delimiter: ',', skip_empty_lines: true, relax_column_count: true })
-    const seriesMap: SeriesMap = {}
+    const seriesMap: SeriesMap = {
+      event: new TimeSeries({ name: 'eventCode + eventNotes', type: 'TEXT' }),
+      battery: new TimeSeries({ name: 'battery', type: 'NUMBER', units: 'V' }),
+      signalStrength: new TimeSeries({ name: 'signalStrength', type: 'NUMBER', units: 'dBm' })
+    }
     const serverTime = this.dayjs().toDate()
-
-    seriesMap.Event = new TimeSeries({ name: 'Event', type: 'TEXT' })
 
     records.forEach((parts: string[]) => {
       const id = parts[0]
 
       if (id === '200') {
-        const seriesName = `Modbus_${parts[1]}`
-        if (!seriesMap[seriesName]) {
-          seriesMap[seriesName] = new TimeSeries({ name: seriesName, type: 'NUMBER', units: parts[4] })
-        }
         const timestamp = this.dayjs(parts[5]).toDate()
-        seriesMap[seriesName].insert({ timestamp, value: Number(parts[3]) })
+        const value = Number(parts[3])
+        const seriesName = parts[1]
+
+        if (seriesName === 'flow' || seriesName === 'flow1' || seriesName === 'flow2') {
+          if (!seriesMap[seriesName]) {
+            seriesMap[seriesName] = new TimeSeries({ name: seriesName, type: 'NUMBER' })
+          }
+          seriesMap[seriesName].insert({ timestamp, value })
+        }
         return
       }
 
       if (parts.length === 2) {
-        seriesMap.Event.insert({ timestamp: this.dayjs(parts[1]).toDate(), value: parts[0] })
+        seriesMap.event.insert({ timestamp: this.dayjs(parts[1]).toDate(), value: parts[0] })
         return
       }
 
-      if (id.startsWith('l')) {
-        if (!seriesMap[id]) {
-          seriesMap[id] = new TimeSeries({ name: id, type: 'NUMBER', units: parts[3] })
+      if (id === 'l003' && parts[1] && this.dayjs(parts[1]).isValid()) {
+        const timestamp = this.dayjs(parts[1]).toDate()
+        if (!seriesMap.flow) {
+          seriesMap.flow = new TimeSeries({ name: 'flow', type: 'NUMBER' })
         }
+        seriesMap.flow.insert({ timestamp, value: Number(parts[2]) })
+        return
+      }
 
+      if (id === 'l011') {
         let timestamp = serverTime
         if (parts[1] && this.dayjs(parts[1]).isValid()) {
           timestamp = this.dayjs(parts[1]).toDate()
         }
-
-        seriesMap[id].insert({ timestamp, value: Number(parts[2]) })
+        seriesMap.battery.insert({ timestamp, value: Number(parts[2]) })
         return
       }
 
-      if (id === 'radio') {
-        if (!seriesMap[id]) {
-          seriesMap[id] = new TimeSeries({ name: id, type: 'NUMBER' })
-        }
-
+      if (id === 'radio' && parts[2] !== undefined) {
         let timestamp = serverTime
         if (parts[1] && this.dayjs(parts[1]).isValid()) {
           timestamp = this.dayjs(parts[1]).toDate()
         }
-
-        if (parts[2] !== undefined) {
-          seriesMap[id].insert({ timestamp, value: Number(parts[2]) })
-        }
+        seriesMap.signalStrength.insert({ timestamp, value: Number(parts[2]) })
       }
     })
 

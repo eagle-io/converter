@@ -7,31 +7,47 @@ describe('Unit test for Captis converter', function () {
     const buff = fs.readFileSync('lib/das-captis-v2/test/input.dat')
     const result = converter.convert(buff)
 
-    expect(result.series.length).toBeGreaterThanOrEqual(4)
+    expect(result.series.length).toEqual(6)
 
-    const eventSeries = result.series.find(s => s.name === 'Event')
-    const modbusSeries = result.series.find(s => s.name === 'Modbus_flow')
-    const l002Series = result.series.find(s => s.name === 'l002')
-    const radioSeries = result.series.find(s => s.name === 'radio')
+    const eventSeries = result.series.find(s => s.name === 'eventCode + eventNotes')
+    const batterySeries = result.series.find(s => s.name === 'battery')
+    const signalStrengthSeries = result.series.find(s => s.name === 'signalStrength')
+    const flowSeries = result.series.find(s => s.name === 'flow')
+    const modbusFlow1Series = result.series.find(s => s.name === 'flow1')
+    const modbusFlow2Series = result.series.find(s => s.name === 'flow2')
 
     expect(eventSeries).toBeDefined()
-    expect(modbusSeries).toBeDefined()
-    expect(l002Series).toBeDefined()
-    expect(radioSeries).toBeDefined()
+    expect(batterySeries).toBeDefined()
+    expect(signalStrengthSeries).toBeDefined()
+    expect(flowSeries).toBeDefined()
+    expect(modbusFlow1Series).toBeDefined()
+    expect(modbusFlow2Series).toBeDefined()
 
-    if (modbusSeries) {
-      expect(modbusSeries.first.value).toEqual(3145728.0)
-      expect(modbusSeries.first.timestamp).toEqual(new Date('2019-09-17T03:51:01Z'))
+    if (batterySeries) {
+      expect(batterySeries.first.timestamp).toBeDefined()
+      expect(batterySeries.first.value).toEqual(3.58)
     }
 
-    if (l002Series) {
-      expect(l002Series.first.timestamp).toEqual(new Date('2019-08-05T07:02:00Z'))
-      expect(l002Series.first.value).toEqual(1.0)
+    if (signalStrengthSeries) {
+      expect(signalStrengthSeries.first.timestamp).toBeDefined()
+      expect(signalStrengthSeries.first.value).toEqual(-94)
     }
 
-    if (radioSeries) {
-      const radioValues = radioSeries.values.filter(v => v === -94)
-      expect(radioValues.length).toBeGreaterThan(0)
+    if (flowSeries) {
+      expect(flowSeries.first.timestamp).toEqual(new Date('2019-08-05T07:02:00Z'))
+      expect(flowSeries.first.value).toEqual(2.0)
+      expect(flowSeries.values).toEqual([2.0, 4.0, 3145728.0, 3145729.0])
+      expect(flowSeries.last.timestamp).toEqual(new Date('2019-09-17T04:51:01Z'))
+    }
+
+    if (modbusFlow1Series) {
+      expect(modbusFlow1Series.first.timestamp).toEqual(new Date('2019-09-17T05:51:01Z'))
+      expect(modbusFlow1Series.first.value).toEqual(3145730.0)
+    }
+
+    if (modbusFlow2Series) {
+      expect(modbusFlow2Series.first.timestamp).toEqual(new Date('2019-09-17T06:51:01Z'))
+      expect(modbusFlow2Series.first.value).toEqual(3145731.0)
     }
   })
 })
