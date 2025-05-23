@@ -21,6 +21,7 @@ export class SiemensLogoPlcConverter extends Converter {
       const timestamp = new Date(new Date().toISOString()) // Server UTC time
 
       const seriesList: TimeSeries<number>[] = []
+      let recordCount = 0 // Counter to track the number of records added
 
       for (const [key, value] of Object.entries(reported)) {
         if (key === '$logotime' || typeof value !== 'object' || value === null) continue
@@ -39,6 +40,12 @@ export class SiemensLogoPlcConverter extends Converter {
             }
           ]
         } as TimeSeries<number>) // Type assertion to satisfy TypeScript
+        recordCount++ // Increment the record count
+      }
+
+      // If no records were added, return a dummy document
+      if (recordCount === 0) {
+        return this.createDummyDocument()
       }
 
       return new JtsDocument({ series: seriesList })
