@@ -34,7 +34,7 @@ export class DASCaptisV2Converter extends Converter {
         return
       }
 
-      if (parts.length === 2) {
+      if (parts.length === 2 && parts[0][0] === 'a') {
         seriesMap.event.insert({ timestamp: this.dayjs(parts[1]).toDate(), value: parts[0] })
         return
       }

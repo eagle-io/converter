@@ -40,6 +40,13 @@ describe('Unit test for Captis converter', function () {
       expect(flowSeries.last.timestamp).toEqual(new Date('2019-09-17T04:51:01Z'))
     }
 
+    if (eventSeries) {
+      expect(eventSeries.first.timestamp).toEqual(new Date('2019-08-06T05:00:53Z'))
+      expect(eventSeries.first.value).toEqual('a00077-00008')
+      expect(eventSeries.last.value).toEqual('a00077-00009')
+      expect(eventSeries.last.timestamp).toEqual(new Date('2019-08-06T05:01:28Z'))
+    }
+
     if (modbusFlow1Series) {
       expect(modbusFlow1Series.first.timestamp).toEqual(new Date('2019-09-17T05:51:01Z'))
       expect(modbusFlow1Series.first.value).toEqual(3145730.0)
