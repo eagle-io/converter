@@ -86,7 +86,27 @@ describe('LogoPlcConverter Unit Test', () => {
     expect(timeDifference).toBeLessThanOrEqual(10000) // Ensure the difference is within 10 seconds
   })
 
-  it('should handle empty messages and produce a dummy JTS output', () => {
+  it('should handle non-empty input objects with no records and generate dummy JTS output', () => {
+    const jsonString = `{
+      "state": {
+        "reported": {
+          "$logotime": 1746708821
+        }
+      }
+    }`
+    const input = Buffer.from(jsonString) // Empty message
+    const result = converter.convert(input)
+    // Validate the output structure for empty messages
+    expect(result).toHaveProperty('series')
+    expect(result.series.length).toBe(1)
+    expect(result.series[0].name).toEqual('converter')
+    expect(result.series[0].type).toEqual('TEXT')
+    expect(result.series[0].records.length).toEqual(1)
+    expect(result.series[0].records[0].timestamp.toISOString()).toEqual('2025-01-01T00:00:00.000Z')
+    expect(result.series[0].records[0].value).toEqual('Ok') // Convert to string
+  })
+
+  it('should handle empty object and produce a dummy JTS output', () => {
     const input = Buffer.from('{}') // Empty message
     const result = converter.convert(input)
     // Validate the output structure for empty messages
