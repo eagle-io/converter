@@ -2,11 +2,10 @@ version: v1.0
 name: Deploy Converters
 agent:
   machine:
-    type: e1-standard-2
-    os_image: ubuntu1804
+    type: e2-standard-2
   containers:
     - name: main
-      image: 'public.ecr.aws/sam/build-nodejs16.x:latest'
+      image: 'public.ecr.aws/sam/build-nodejs18.x:latest'
 blocks:
   - name: Deploy to Lambda
     task:

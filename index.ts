@@ -10,6 +10,9 @@ import { DaImgwJsonConverter } from './lib/daimgwjson/daimgwjson-converter'
 import { DaCortexJsonConverter } from './lib/dacortexjson/dacortexjson-converter'
 import { KolibriCloudConverter } from './lib/kolibricloud/kolibri-cloud-converter'
 import { AcoemFusionConverter } from './lib/acoem-fusion/acoem-fusion-converter'
+import { DASCaptisV2Converter } from './lib/das-captis-v2/das-captis-v2-converter'
+import { DaRubixJsonConverter } from './lib/darubixjson/darubixjson-converter'
+import { SiemensLogoPlcConverter } from './lib/siemens-logo-plc/siemens-logo-plc-converter'
 
 interface ConverterInput {
   // filename of received payload (if available)
@@ -94,4 +97,16 @@ export const kolibriCloudConverter = async (input: ConverterInput): Promise<Conv
 
 export const acoemFusionConverter = async (input: ConverterInput): Promise<ConverterOutput> => {
   return convert(new AcoemFusionConverter(), input)
+}
+
+export const dasCaptisV2Converter = async (input: ConverterInput): Promise<ConverterOutput> => {
+  return convert(new DASCaptisV2Converter(), input)
+}
+
+export const danoneRubixConverter = async (input: ConverterInput): Promise<ConverterOutput> => {
+  return convert(new DaRubixJsonConverter(), input)
+}
+
+export const siemensLogoPlcConverter = async (input: ConverterInput): Promise<ConverterOutput> => {
+  return convert(new SiemensLogoPlcConverter(), input)
 }
