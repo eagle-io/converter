@@ -3,6 +3,7 @@ import { JtsDocument } from '@eagle-io/timeseries'
 import { Converter } from './converter'
 import { SampleConverter } from './lib/sample/sample-converter'
 import { QuantAQModulairConverter } from './lib/quantaq-modulair/quantaq-modulair-converter'
+import { QuantAQModulairXConverter } from './lib/quantaq-modulair-x/quantaq-modulair-x-converter'
 import { CubeNoiseConverter } from './lib/cube-noise/cube-noise-converter'
 import { SyscomVibrationConverter } from './lib/syscom-vibration/syscom-vibration-converter'
 import { SampleWithZoneConverter } from './lib/sample-with-zone/sample-with-zone-converter'
@@ -73,6 +74,10 @@ export const sampleWithZoneConverter = async (input: ConverterInput): Promise<Co
 
 export const quantAqModulairConverter = async (input: ConverterInput): Promise<ConverterOutput> => {
   return convert(new QuantAQModulairConverter(), input)
+}
+
+export const quantAqModulairXConverter = async (input: ConverterInput): Promise<ConverterOutput> => {
+  return convert(new QuantAQModulairXConverter(), input)
 }
 
 export const cubeNoiseConverter = async (input: ConverterInput): Promise<ConverterOutput> => {
