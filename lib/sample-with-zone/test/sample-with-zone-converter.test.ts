@@ -14,7 +14,7 @@ describe('Unit test for sample converter', function () {
     const timezone = 'Australia/Sydney'
     const result = converter.convert(buff, timezone)
 
-    expect(result.series[0].first.timestamp).toEqual(dayjs.tz('2022-09-01T14:01:01', timezone).toDate())
+    expect(result.series[0].first?.timestamp).toEqual(dayjs.tz('2022-09-01T14:01:01', timezone).toDate())
     expect(result.series[0].values).toEqual([3.5, 5.7, 7.8])
     expect(result.series[1].values).toEqual(['apple', 'banana', 'melon'])
     expect(result.series[2].values).toEqual(['true', 'false', 'true'])

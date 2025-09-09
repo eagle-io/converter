@@ -1,15 +1,15 @@
 {
   "name": "converter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Library of functions to convert timeseries data to JTS",
   "main": "index.ts",
   "repository": "https://github.com/eagle-io/converter",
   "author": "jarrah@eagle.io",
   "license": "GPL 3.0",
   "dependencies": {
-    "@eagle-io/timeseries": "^1.0.6",
+    "@eagle-io/timeseries": "^1.0.7",
     "csv-parse": "^5.5.6",
-    "dayjs": "^1.11.13"
+    "dayjs": "^1.11.18"
   },
   "scripts": {
     "unit": "jest",

@@ -15,7 +15,7 @@ describe('Unit test for acoem fusion converter', function () {
     const timezone = 'Australia/Brisbane'
     const result = converter.convert(buff, timezone)
 
-    expect(result.series[0].first.timestamp).toEqual(dayjs.tz('2012-01-04T22:01:01', timezone).toDate())
+    expect(result.series[0].first?.timestamp).toEqual(dayjs.tz('2012-01-04T22:01:01', timezone).toDate())
     expect(result.series[0].values).toEqual([40.0])
     expect(result.series[1].values).toEqual([41.0])
     expect(result.series[2].values).toEqual([41.0])
