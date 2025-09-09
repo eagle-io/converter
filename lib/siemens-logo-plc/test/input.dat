@@ -1,0 +1,121 @@
+{
+  "state": {
+    "reported": {
+      "PumpModeAuto": {
+        "desc": "I-bit-12-1",
+        "value": [
+          0
+        ]
+      },
+      "PumpModeMan": {
+        "desc": "I-bit-13-1",
+        "value": [
+          0
+        ]
+      },
+      "Pump01Sel": {
+        "desc": "M-bit-11-1",
+        "value": [
+          1
+        ]
+      },
+      "Pump02Sel": {
+        "desc": "M-bit-12-1",
+        "value": [
+          0
+        ]
+      },
+      "Pump01Run": {
+        "desc": "Q-bit-1-1",
+        "value": [
+          0
+        ]
+      },
+      "Pump02Run": {
+        "desc": "Q-bit-2-1",
+        "value": [
+          0
+        ]
+      },
+      "Pump01Alarm": {
+        "desc": "M-bit-15-1",
+        "value": [
+          0
+        ]
+      },
+      "Pump02Alarm": {
+        "desc": "M-bit-16-1",
+        "value": [
+          0
+        ]
+      },
+      "Pump01TripFB": {
+        "desc": "I-bit-2-1",
+        "value": [
+          0
+        ]
+      },
+      "Pump02TripFB": {
+        "desc": "I-bit-3-1",
+        "value": [
+          0
+        ]
+      },
+      "BatteryLow": {
+        "desc": "I-bit-5-1",
+        "value": [
+          0
+        ]
+      },
+      "LS002_LL": {
+        "desc": "I-bit-6-1",
+        "value": [
+          0
+        ]
+      },
+      "LS003_HL": {
+        "desc": "I-bit-7-1",
+        "value": [
+          0
+        ]
+      },
+      "LS004_HHL": {
+        "desc": "I-bit-8-1",
+        "value": [
+          1
+        ]
+      },
+      "GenStart": {
+        "desc": "Q-bit-3-1",
+        "value": [
+          0
+        ]
+      },
+      "GenRunning": {
+        "desc": "I-bit-4-1",
+        "value": [
+          0
+        ]
+      },
+      "GenFault": {
+        "desc": "I-bit-9-1",
+        "value": [
+          0
+        ]
+      },
+      "GenLowFuel": {
+        "desc": "I-bit-10-1",
+        "value": [
+          0
+        ]
+      },
+      "Strobe": {
+        "desc": "Q-bit-5-1",
+        "value": [
+          1
+        ]
+      },
+      "$logotime": 1746708651
+    }
+  }
+}
