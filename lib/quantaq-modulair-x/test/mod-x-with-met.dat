@@ -1,0 +1,146 @@
+{
+  "data": [
+    {
+      "co": 387.38,
+      "geo": {
+        "lat": null,
+        "lon": null
+      },
+      "met": {
+        "wx_dew_point": 8.53,
+        "wx_pressure": 1014.4,
+        "wx_rh": 91.19,
+        "wx_temp": 9.89,
+        "wx_u": -0.892,
+        "wx_v": 0.317,
+        "wx_wd": 289.55,
+        "wx_ws": 0.95,
+        "wx_ws_scalar": 1.08
+      },
+      "model": {
+        "gas": {
+          "co": 964,
+          "no": 973,
+          "no2": 974,
+          "o3": 975
+        },
+        "pm": {
+          "pm1": 969,
+          "pm10": 971,
+          "pm25": 970,
+          "tsp": 972
+        }
+      },
+      "no": 0.49,
+      "no2": 49.08,
+      "o3": 9.4,
+      "pm1": 1.02,
+      "pm10": 28.56,
+      "pm25": 3.03,
+      "raw_data_id": 215622,
+      "sn": "MOD-X-00891",
+      "timestamp": "2025-04-03T16:39:18",
+      "timestamp_local": "2025-04-03T12:39:18",
+      "tsp": 73.63,
+      "url": "https://api.quant-aq.dev/v1/devices/MOD-X-00891/data/215621"
+    },
+    {
+      "co": 186.64,
+      "geo": {
+        "lat": null,
+        "lon": null
+      },
+      "met": {
+        "wx_dew_point": 2.21,
+        "wx_pressure": 1009.1,
+        "wx_rh": 60,
+        "wx_temp": 9.59,
+        "wx_u": -0.661,
+        "wx_v": 1.453,
+        "wx_wd": 335.54,
+        "wx_ws": 1.6,
+        "wx_ws_scalar": 1.67
+      },
+      "model": {
+        "gas": {
+          "co": 980,
+          "no": 981,
+          "no2": 982,
+          "o3": 983
+        },
+        "pm": {
+          "pm1": 969,
+          "pm10": 971,
+          "pm25": 970,
+          "tsp": 972
+        }
+      },
+      "no": 4.57,
+      "no2": 27.98,
+      "o3": 7.46,
+      "pm1": 0.07,
+      "pm10": 24.62,
+      "pm25": 0.72,
+      "raw_data_id": 227829,
+      "sn": "MOD-X-00891",
+      "timestamp": "2025-04-07T04:02:47",
+      "timestamp_local": "2025-04-07T00:02:47",
+      "tsp": 24.62,
+      "url": "https://api.quant-aq.dev/v1/devices/MOD-X-00891/data/227828"
+    },
+    {
+      "co": 267.43,
+      "geo": {
+        "lat": null,
+        "lon": null
+      },
+      "met": {
+        "wx_dew_point": 2.68,
+        "wx_pressure": 998.73,
+        "wx_rh": 87.6,
+        "wx_temp": 4.57,
+        "wx_u": 1.016,
+        "wx_v": 0.241,
+        "wx_wd": 76.64,
+        "wx_ws": 1.04,
+        "wx_ws_scalar": 1.16
+      },
+      "model": {
+        "gas": {
+          "co": 980,
+          "no": 981,
+          "no2": 982,
+          "o3": 983
+        },
+        "pm": {
+          "pm1": 969,
+          "pm10": 971,
+          "pm25": 970,
+          "tsp": 972
+        }
+      },
+      "no": -1.05,
+      "no2": 34.58,
+      "o3": 4.03,
+      "pm1": 0.47,
+      "pm10": 18.82,
+      "pm25": 1.02,
+      "raw_data_id": 231897,
+      "sn": "MOD-X-00891",
+      "timestamp": "2025-04-08T14:06:03",
+      "timestamp_local": "2025-04-08T10:06:03",
+      "tsp": 18.82,
+      "url": "https://api.quant-aq.dev/v1/devices/MOD-X-00891/data/231897"
+    }
+  ],
+  "meta": {
+    "first_url": "https://api.quant-aq.dev/v1/devices/MOD-X-00891/data/?page=1&per_page=50&limit=3",
+    "last_url": "https://api.quant-aq.dev/v1/devices/MOD-X-00891/data/?page=1&per_page=50&limit=3",
+    "next_url": null,
+    "page": 1,
+    "pages": 1,
+    "per_page": 50,
+    "prev_url": null,
+    "total": 3
+  }
+}
