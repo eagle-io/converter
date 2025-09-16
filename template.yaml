@@ -62,6 +62,23 @@ Resources:
         Sourcemap: true
         EntryPoints:
           - index.ts
+  QuantAqModulairX:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: QuantAQ MODULAIR-X
+      Handler: index.quantAqModulairXConverter
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Tags:
+        Scope: public
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: "es2020"
+        Sourcemap: true
+        EntryPoints:
+          - index.ts
   SyscomVibration:
     Type: AWS::Serverless::Function
     Properties:
