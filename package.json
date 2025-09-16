@@ -15,7 +15,7 @@
     "unit": "jest",
     "lint": "eslint --quiet --fix **/*.ts",
     "compile": "tsc",
-    "test": "npm run compile && npm run unit && npm run lint"
+    "test": "npm run compile && cross-env TZ=UTC npm run unit && npm run lint"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.145",
@@ -23,6 +23,7 @@
     "@types/node": "^18.19.50",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
+    "cross-env": "^10.0.0",
     "esbuild": "^0.23.1",
     "esbuild-jest": "^0.4.0",
     "eslint": "8.57.1",
