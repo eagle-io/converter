@@ -13,7 +13,10 @@ export class DASCaptisV2Converter extends Converter {
     const seriesMap: SeriesMap = {
       event: new TimeSeries({ name: 'eventCode + eventNotes', type: 'TEXT' }),
       battery: new TimeSeries({ name: 'battery', type: 'NUMBER', units: 'V' }),
-      signalStrength: new TimeSeries({ name: 'signalStrength', type: 'NUMBER', units: 'dBm' })
+      signalStrength: new TimeSeries({ name: 'signalStrength', type: 'NUMBER', units: 'dBm' }),
+      flow: new TimeSeries({ name: 'flow', type: 'NUMBER' }),
+      flow1: new TimeSeries({ name: 'flow1', type: 'NUMBER' }),
+      flow2: new TimeSeries({ name: 'flow2', type: 'NUMBER' })
     }
     const serverTime = this.dayjs().toDate()
 
@@ -26,9 +29,6 @@ export class DASCaptisV2Converter extends Converter {
         const seriesName = parts[1]
 
         if (seriesName === 'flow' || seriesName === 'flow1' || seriesName === 'flow2') {
-          if (!seriesMap[seriesName]) {
-            seriesMap[seriesName] = new TimeSeries({ name: seriesName, type: 'NUMBER' })
-          }
           seriesMap[seriesName].insert({ timestamp, value })
         }
         return
@@ -41,9 +41,6 @@ export class DASCaptisV2Converter extends Converter {
 
       if (id === 'l003' && parts[1] && this.dayjs(parts[1]).isValid()) {
         const timestamp = this.dayjs(parts[1]).toDate()
-        if (!seriesMap.flow) {
-          seriesMap.flow = new TimeSeries({ name: 'flow', type: 'NUMBER' })
-        }
         seriesMap.flow.insert({ timestamp, value: Number(parts[2]) })
         return
       }
